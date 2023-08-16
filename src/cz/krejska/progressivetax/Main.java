@@ -1,6 +1,10 @@
-package cz.krejska.progressivetax
+package cz.krejska.progressivetax;
 
-public class Main {
+/**
+ * @author Daniel Krejska
+ * @since 15.8.2023
+ */
+final class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
     }
