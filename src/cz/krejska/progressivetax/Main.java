@@ -18,6 +18,7 @@ public class Main
         TaxSystem cz = new TaxSystem();
         cz.addTaxRate(0, 20);
         int taxToPay = cz.calculateTax(income);
+
         System.out.println("before tax: " + income);
         System.out.println("tax: " + taxToPay);
         System.out.println("after tax: " + (income - taxToPay));

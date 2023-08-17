@@ -16,13 +16,13 @@ final class TaxSystem
 
     TaxSystem()
     {
-        taxRateLimits = new ArrayList<TaxRateLimit>();
+        taxRateLimits = new ArrayList<>();
     }
 
     public void addTaxRate(int incomeLimit, int taxRate)
     {
         this.taxRateLimits.add(new TaxRateLimit(incomeLimit, taxRate));
-        this.taxRateLimits.sort(Comparator.comparingInt(TaxRateLimit::incomeLimit));
+        this.taxRateLimits.sort(Comparator.comparingInt(TaxRateLimit::incomeLimit).reversed());
     }
 
     public int calculateTax(int income)
