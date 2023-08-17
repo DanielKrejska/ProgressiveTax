@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Daniel Krejska
- * @since 16.8.2023
+ * @since 17.8.2023
  */
 class TaxSystemTest
 {

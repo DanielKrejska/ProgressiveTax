@@ -1,5 +1,6 @@
 package cz.krejska.progressivetax;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ import java.util.Scanner;
  */
 public class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
         Scanner scanner = new Scanner(System.in);
         String country = getCountry(scanner);
@@ -17,10 +18,7 @@ public class Main
         scanner.close();
 
         HashMap<String, TaxSystem> economies = new HashMap<>();
-        // LOAD TAXSYSTEMS AND TAXRATELIMITS IN THEM
-        economies.put("cz", new TaxSystem());
-        economies.get("cz").addTaxRate(0, 20);
-        economies.get("cz").addTaxRate(500, 40);
+        DataLoader.loadTaxSystems(economies, "data/economies.csv", ";");
 
         int taxToPay = economies.get(country).calculateTax(income);
 
