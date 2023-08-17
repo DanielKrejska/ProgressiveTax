@@ -1,5 +1,6 @@
 package cz.krejska.progressivetax;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -15,9 +16,13 @@ public class Main
         int income = getIncome(scanner);
         scanner.close();
 
-        TaxSystem cz = new TaxSystem();
-        cz.addTaxRate(0, 20);
-        int taxToPay = cz.calculateTax(income);
+        HashMap<String, TaxSystem> economies = new HashMap<>();
+        // LOAD TAXSYSTEMS AND TAXRATELIMITS IN THEM
+        economies.put("cz", new TaxSystem());
+        economies.get("cz").addTaxRate(0, 20);
+        economies.get("cz").addTaxRate(500, 40);
+
+        int taxToPay = economies.get(country).calculateTax(income);
 
         System.out.println("before tax: " + income);
         System.out.println("tax: " + taxToPay);
