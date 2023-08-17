@@ -11,12 +11,11 @@ import java.util.Comparator;
  */
 final class TaxSystem
 {
-    private final String country;
-    private ArrayList<TaxRateLimit> taxRateLimits;
+    // intelliJ wants it final, no idea why or why it works
+    private final ArrayList<TaxRateLimit> taxRateLimits;
 
-    TaxSystem(String country)
+    TaxSystem()
     {
-        this.country = country;
         taxRateLimits = new ArrayList<TaxRateLimit>();
     }
 
@@ -37,13 +36,8 @@ final class TaxSystem
                 continue;
             }
             income -= diff;
-            totalTax += (diff * (taxRateLimit.taxRate() / 100));
+            totalTax += (int) ((double) diff * ((double) taxRateLimit.taxRate() / 100));
         }
         return totalTax;
-    }
-
-    public String getCountry()
-    {
-        return country;
     }
 }
