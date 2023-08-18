@@ -25,18 +25,18 @@ final class TaxSystem
         this.taxRateLimits.sort(Comparator.comparingInt(TaxRateLimit::incomeLimit).reversed());
     }
 
-    public int calculateTax(int income)
+    public double calculateTax(double income)
     {
         int totalTax = 0;
         for (TaxRateLimit taxRateLimit : this.taxRateLimits)
         {
-            int diff = income - taxRateLimit.incomeLimit();
+            double diff = income - taxRateLimit.incomeLimit();
             if (diff <= 0)
             {
                 continue;
             }
             income -= diff;
-            totalTax += (int) ((double) diff * ((double) taxRateLimit.taxRate() / 100));
+            totalTax += (int) (diff * ((double) taxRateLimit.taxRate() / 100));
         }
         return totalTax;
     }

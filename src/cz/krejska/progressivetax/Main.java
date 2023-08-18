@@ -18,14 +18,15 @@ public class Main
 
         Scanner scanner = new Scanner(System.in);
         String country = getCountry(scanner, new ArrayList<>(economies.keySet()));
-        int income = getIncome(scanner);
+        double income = getIncome(scanner);
         scanner.close();
 
-        int taxToPay = economies.get(country).calculateTax(income);
+        double taxToPay = economies.get(country).calculateTax(income);
 
-        System.out.println("before tax: " + income);
-        System.out.println("tax: " + taxToPay);
-        System.out.println("after tax: " + (income - taxToPay));
+        String format = "%-15s %10.2f €\n";
+        System.out.format(format, "before tax:", income);
+        System.out.format(format, "tax:", taxToPay);
+        System.out.format(format, "after rax:", income - taxToPay);
     }
 
     static String getCountry(Scanner scanner, ArrayList<String> validCountries)
@@ -35,20 +36,30 @@ public class Main
         String userInput = scanner.nextLine();
         while (!validCountries.contains(userInput))
         {
-            System.err.println("invalid input for country, try again");
+            System.err.println("that's not a valid option, try again");
             userInput = scanner.nextLine();
         }
         return userInput;
     }
 
-    static int getIncome(Scanner scanner)
+    static double getIncome(Scanner scanner)
     {
         System.out.print("€: ");
-        while (!scanner.hasNextInt())
+        double result;
+        while ( (result = inputDouble(scanner)) < 0 )
+        {
+            System.err.println("income can not be negative");
+        }
+        return result;
+    }
+
+    static double inputDouble(Scanner scanner)
+    {
+        while (!scanner.hasNextDouble())
         {
             scanner.nextLine();
-            System.err.println("invalid input for income, try again");
+            System.err.println("this is not DOUBLE (use ',' instead of '.'), try again");
         }
-        return scanner.nextInt();
+        return scanner.nextDouble();
     }
 }
